@@ -80,7 +80,7 @@
       const headers = new Headers()
       headers.append("Content-Type", "application/json")
 
-      const body = {"message":Welcome to COVID-19 dashboard", "dashboard": "World"}
+      const body = {"message":"Welcome to COVID-19 dashboard", "dashboard": "World"}
 
       const options = {
         method: "POST",
@@ -100,7 +100,7 @@
       // var d = new Date();
       var d = new Date('2020-09-01 09:27:00').toString();
       document.querySelector("#updated_at").innerHTML = d;
-      document.querySelector("#app_version").innerHTML = "Ver 0.9.10";
+      document.querySelector("#app_version").innerHTML = "Ver 0.9.11";
     </script>
     
     <script>
