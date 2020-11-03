@@ -11,6 +11,8 @@
     
     <script src="https://use.fontawesome.com/beed62a6a7.js"></script>
     
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
     </script>
@@ -65,7 +67,7 @@
       <p>
       
       <!--<iframe src="xxxxxxx" width="100%" height="1000" style="border:none;"></iframe>-->
-      <iframe id="dashboard" src="https://d13ef7c99d4e.ngrok.io" width="100%" height="2400" style=""></iframe>
+      <iframe id="dashboard" src="https://439dd2a72390.ngrok.io" width="100%" height="2400" style=""></iframe>
       
 
 
@@ -102,7 +104,7 @@
       const headers = new Headers()
       headers.append("Content-Type", "application/json")
 
-      const body = {"message":"Welcome to COVID-19 dashboard", "dashboard": "Worldx"}
+      const body = {"message":"Welcome to COVID-19 dashboard", "dashboard": "Worldx2"}
 
       const options = {
         method: "POST",
@@ -120,9 +122,9 @@
 
     <script>
       // var d = new Date();
-      var d = new Date('2020-11-01 11:43:00').toString();
+      var d = new Date('2020-11-03 13:14:00').toString();
       document.querySelector("#updated_at").innerHTML = d;
-      document.querySelector("#app_version").innerHTML = "Ver 3.0.1";
+      document.querySelector("#app_version").innerHTML = "Ver 3.2.1";
     </script>
     
     <script>
@@ -138,7 +140,7 @@
         const headers = new Headers()
         headers.append("Content-Type", "application/json")
 
-        const body = {"message":"Welcome to COVID-19 dashboard", "dashboard": "Worldx.reload"}
+        const body = {"message":"Welcome to COVID-19 dashboard", "dashboard": "Worldx2.reload"}
 
         const options = {
           method: "POST",
@@ -153,6 +155,61 @@
           console.error("[error] " + err.message)
         })
       }
+      
+      // --------------------------------------------------
+      
+      window.addEventListener("message",function (e) { 
+        
+             // Set Cookies for custom configs --------------------
+            var _expires_in_days = 365; // 365 days
+            var _SameSite = "Lax";
+            var _target_domain = window.location.hostname;
+                  
+
+            /*Check if the iframe website is sending the message*/
+            if(e.origin === document.getElementById("dashboard").getAttribute("src")){ 
+
+              var tmp_data = JSON.parse(e.data);
+                
+              document.querySelector("#dashboard").contentWindow.postMessage(tmp_data, document.querySelector("#dashboard").src);
+              
+              if (tmp_data.cov_weight_type != undefined) {
+                Cookies.set("cov_weight_type", tmp_data.cov_weight_type, { 
+                  expires: _expires_in_days, 
+                  domain: _target_domain,
+                  SameSite: _SameSite
+                });
+                
+                // setCookie('cov_weight_type', tmp_data.cov_weight_type, 365);
+                console.log("set cookie: " + "cov_weight_type");
+              }
+              
+              if (tmp_data.cov_WHO_Region != undefined) {
+                Cookies.set("cov_WHO_Region", tmp_data.cov_WHO_Region, { 
+                  expires: _expires_in_days, 
+                  domain: _target_domain,
+                  SameSite: _SameSite
+                });
+                
+                // setCookie('cov_WHO_Region', tmp_data.cov_WHO_Region, 365);
+                console.log("set cookie: " + "cov_WHO_Region");
+              }
+              
+              if (tmp_data.cov_sel_Country_EN != undefined) {
+                Cookies.set("cov_sel_Country_EN", tmp_data.cov_sel_Country_EN, { 
+                  expires: _expires_in_days, 
+                  domain: _target_domain,
+                  SameSite: _SameSite
+                });
+                
+                // setCookie('cov_sel_Country_EN', tmp_data.cov_sel_Country_EN, 365);
+                console.log("set cookie: " + "cov_sel_Country_EN");
+              }
+              
+            }
+    },false);
+      
+      
     </script>
     
   </body>
