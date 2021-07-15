@@ -180,7 +180,7 @@
               document.querySelector("#dashboard").contentWindow.postMessage(tmp_data, document.querySelector("#dashboard").src);
               
               if (tmp_data.cov_weight_type != undefined) {
-                Cookies.set("cov_weight_type", tmp_data.cov_weight_type, { 
+                window.Cookies.set("cov_weight_type", tmp_data.cov_weight_type, { 
                   expires: _expires_in_days, 
                   domain: _target_domain,
                   SameSite: _SameSite
@@ -191,7 +191,7 @@
               }
               
               if (tmp_data.cov_WHO_Region != undefined) {
-                Cookies.set("cov_WHO_Region", tmp_data.cov_WHO_Region, { 
+                window.Cookies.set("cov_WHO_Region", tmp_data.cov_WHO_Region, { 
                   expires: _expires_in_days, 
                   domain: _target_domain,
                   SameSite: _SameSite
@@ -202,7 +202,7 @@
               }
               
               if (tmp_data.cov_sel_Country_EN != undefined) {
-                Cookies.set("cov_sel_Country_EN", tmp_data.cov_sel_Country_EN, { 
+                window.Cookies.set("cov_sel_Country_EN", tmp_data.cov_sel_Country_EN, { 
                   expires: _expires_in_days, 
                   domain: _target_domain,
                   SameSite: _SameSite
